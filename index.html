@@ -75,14 +75,32 @@
                 Reliability Engineering book</a>
         </small>
     </header>
+
     <div class="flex items-center justify-center bg-lightest-blue navy pa3">
+
         <svg class="w1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
             <title>info icon</title>
             <path
                 d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6">
             </path>
         </svg>
-        <div class="ml3"><a class="navy" href="instructions.html">Instructions</a></div>
+        <div class="ml3 mbr"><a class="navy" href="/">The Wheel</a></div>
+
+        <svg class="w1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
+            <title>info icon</title>
+            <path
+                d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6">
+            </path>
+        </svg>
+        <div class="ml3 mbr"><a class="navy" href="instructions.html">Instructions</a></div>
+
+        <svg class="w1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
+            <title>info icon</title>
+            <path
+                d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6">
+            </path>
+        </svg>
+        <div class="ml3"><a class="navy" href="volunteer.html">Choose a "volunteer"</a></div>
     </div>
 
     <article class="cf mw mw-h center bg-white br3 mv4 ba b--black-10">
@@ -146,7 +164,7 @@
                     <div class="stopwatch pa3"></div>
                     <button id="start" class="button" onClick="stopwatch.start();changeControls();">▶</button>
                     <button id="restart" class="button"
-                        onClick="stopwatch.restart();stopwatch.clear();changeControls();">↻</button>
+                        onClick="restart();">↻</button>
                     <button id="lap" class="button" onClick="stopwatch.lap();">Lap</button>
                     <ul class="results"></ul>
                     <script src="static/stopwatch.js"></script>
@@ -158,13 +176,44 @@
     </article>
 
     <footer class="pv4 ph4">
-        <small class="f4 db tc"><a href="https://dastergon.gr" class="link">Pavlos Ratis</a></small>
+        <small class="f4 db tc"><a href="https://david.aparicio.eu" class="link">David Aparicio</a> (2025)</small>
+        <small class="f4 db tc">Originally created by <a href="https://github.com/dastergon/wheel-of-misfortune" class="link">Pavlos Ratis</a> (2020), Other forks: <a href="https://github.com/alphagov/paas-unlucky-dip" class="link">UK Government Digital Service</a>,  <a href="https://github.com/tv2/dcp-wheel-of-misfortune" class="link">Danmark TV2 Channel</a></small>
     </footer>
 </body>
 
 </html>
 
 <script>
+
+
+    function restart() {
+        changeControls();
+        var timingBtn = document.getElementById("start");
+        if (!timingBtn) {
+            var timingBtn = document.getElementById("stop");
+        }
+        timingBtn.setAttribute('onclick', 'stopwatch.stop();changeControls();');
+        timingBtn.id = "stop";
+        timingBtn.innerText = "||";
+
+        stopwatch.restart();
+        stopwatch.clear();
+
+        document.getElementById("first").checked = false;
+        document.getElementById("second").checked = false;
+        document.getElementById("third").checked = false;
+        document.getElementById("fourth").checked = false;
+
+        document.getElementById("first").disabled = false;
+        document.getElementById("second").disabled = true;
+        document.getElementById("third").disabled = true;
+        document.getElementById("fourth").disabled = true;
+
+        // Reset progress bar
+        var progressElement = document.getElementById("progress");
+        progressElement.className = "pie-wrapper";
+        document.getElementById('percent').childNodes[0].nodeValue = 0;
+    }
 
     function unlockCheckbox(c) {
         if (c.value == "first") {
@@ -211,7 +260,5 @@
             timingBtn.id = "start";
             timingBtn.innerText = "▶";
         }
-
-
     }
 </script>

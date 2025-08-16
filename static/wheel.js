@@ -94,12 +94,12 @@ d3.json("./incidents/general_incidents.json", function (error, data) {
                     //populate incident
                     d3.select("#incident p")
                         .html("<h4 class=\"f4 center mw6\">" + data[picked].title + "</h4>" + "<div id=\"play-area\"> <ol id =\"choices\"><ol></div>");
-                    container.on("click", spin, stopwatch.reset(), stopwatch.start(), changeControls(), loadStory(data[picked].inkstory));
+                    container.on("click", spin, stopwatch.reset(), stopwatch.start(), changeControls(), loadStory(data[picked].inkstory), restart());
                    } else {
                     //populate incident
                     d3.select("#incident p")
                         .html("<h4 class=\"f4 center mw6\">" + data[picked].title + "</h4>" + data[picked].scenario);
-                    container.on("click", spin, stopwatch.reset(), stopwatch.start(), changeControls());
+                    container.on("click", spin, stopwatch.reset(), stopwatch.start(), changeControls(), restart());
                 }
                 oldrotation = rotation;
             });
